@@ -105,7 +105,8 @@ fun PantallaContrasena(auth: FirebaseAuth, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button( onClick = {
-
+            val intent = Intent(context, MainActivity::class.java)
+            context.startActivity(intent)
         }
         ) { Text(text = "Cancelar")}
     }
