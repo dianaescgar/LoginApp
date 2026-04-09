@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "604154800429",
+    "project_id": "usuarios-60ec2",
+    "storage_bucket": "usuarios-60ec2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:604154800429:android:a43d34274c86cf0bd78ba4",
+        "android_client_info": {
+          "package_name": "escalante.diana.login"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVk1MMMqhJ-sFZ9kWNe8Bl2ydboBg_b0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

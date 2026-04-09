@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Login</string>
+    <string name="title_activity_contrasena">ContrasenaActivity</string>
+    <string name="title_activity_principal">PrincipalActivity</string>
+</resources>
