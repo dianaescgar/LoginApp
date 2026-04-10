@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.sp
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.database
 import escalante.diana.login.ui.theme.LoginTheme
 
 class MainActivity : ComponentActivity() {
@@ -48,6 +49,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         auth = Firebase.auth
+
+
+        // Write a message to the database
+//        val database = Firebase.database
+//        val myRef = database.getReference("message")
+//
+//        myRef.setValue("Hello, World!")
+
+        if (auth.currentUser != null) {
+            val intent = Intent(this, PrincipalActivity::class.java)
+            startActivity(intent)
+        }
+
         setContent {
             LoginTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

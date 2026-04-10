@@ -34,23 +34,28 @@ import androidx.compose.ui.unit.sp
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.database
 import escalante.diana.login.ui.theme.LoginTheme
 
 class RegistroActivity : ComponentActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
         auth = Firebase.auth
+        database = Firebase.database.reference
 
         setContent {
             LoginTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     PantallaRegistro(
                         auth,
+                        database,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -86,7 +91,7 @@ fun calcularEdad(fechaNacimiento: String): Int {
 }
 
 @Composable
-fun PantallaRegistro(auth: FirebaseAuth, modifier: Modifier = Modifier) {
+fun PantallaRegistro(auth: FirebaseAuth, database: DatabaseReference, modifier: Modifier = Modifier) {
     var nombre by remember() { mutableStateOf("") }
     var correo by remember() { mutableStateOf("") }
     var contra by remember() { mutableStateOf("") }
@@ -187,13 +192,16 @@ fun PantallaRegistro(auth: FirebaseAuth, modifier: Modifier = Modifier) {
             auth.createUserWithEmailAndPassword(correo, contra)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        Toast.makeText(
-                            context,
-                            "El usuario ha sido creado con éxito",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        var userID = auth.currentUser?.uid ?: "anonimo"
+                        var usuario = Usuario(nombre, correo, fechaNacimiento)
+
+                        database.child("usuarios").child(userID).setValue(usuario)
+
+                        Toast.makeText(context, "El usuario ha sido creado con éxito", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(context, MainActivity::class.java)
+                        intent.putExtra("nombre", nombre)
+                        intent.putExtra("correo", correo)
                         context.startActivity(intent)
                     } else {
                         Toast.makeText(context, "No se pudo ingresar", Toast.LENGTH_SHORT).show()

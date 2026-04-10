@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
         <activity
+            android:name=".EditarActivity"
+            android:exported="false"
+            android:label="@string/title_activity_editar"
+            android:theme="@style/Theme.Login" />
+        <activity
             android:name=".PrincipalActivity"
             android:exported="false"
             android:label="@string/title_activity_principal"
