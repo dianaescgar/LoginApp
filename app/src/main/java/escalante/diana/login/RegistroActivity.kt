@@ -1,5 +1,6 @@
 package escalante.diana.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -200,9 +201,12 @@ fun PantallaRegistro(auth: FirebaseAuth, database: DatabaseReference, modifier: 
                         Toast.makeText(context, "El usuario ha sido creado con éxito", Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(context, MainActivity::class.java)
+                        auth.signOut()
                         intent.putExtra("nombre", nombre)
                         intent.putExtra("correo", correo)
+
                         context.startActivity(intent)
+                        (context as? Activity)?.finish()
                     } else {
                         Toast.makeText(context, "No se pudo ingresar", Toast.LENGTH_SHORT).show()
                     }

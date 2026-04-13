@@ -60,6 +60,7 @@ class MainActivity : ComponentActivity() {
         if (auth.currentUser != null) {
             val intent = Intent(this, PrincipalActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         setContent {
